@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -23,7 +25,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String url = "https://api.jsonbin.io/b/5ed2a8bf7741ef56a564d888";
+    private static final String url = "https://raw.githubusercontent.com/sarthak815/covid19data/master/jsontext1";
     ListView listView;
     ArrayList<researchpapers> researchpapersArrayList;
     private Object StringRequest;
@@ -53,27 +55,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadresearchpapersList() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
-            public void onResponse(String response){
-                try{
+            public void onResponse(String response) {
+                try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("researchpapers");
-                    for(int i = 0; i<jsonArray.length();i++){
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                        researchpapers researchpapers = new researchpapers(jsonObject1.getString("title"), jsonObject1.getString("link"));
+                        researchpapers researchpapers = new researchpapers(jsonObject1.getString("Title"), jsonObject1.getString("link"));
                         researchpapersArrayList.add(researchpapers);
                         ListViewAdapter adapter = new ListViewAdapter(researchpapersArrayList, getApplicationContext());
                         listView.setAdapter(adapter);
                     }
-                }catch (JSONException e){
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "There is an error", Toast.LENGTH_LONG).show();
+
+            }
         });
+
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        RequestQueue.add(stringRequest);
+        requestQueue.add(stringRequest);
     }
-
-
 }
