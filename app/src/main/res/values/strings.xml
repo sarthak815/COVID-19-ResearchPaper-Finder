@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Paper Scrapper</string>
+    <string name="covid_19_research">COVID-19 Research</string>
+    <string name="medical">Medical</string>
+    <string name="non_medical">Non-Medical</string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="search">Search</string>
+    <string name="main_menu">Main Menu</string>
+</resources>
