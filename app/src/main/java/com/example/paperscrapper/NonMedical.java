@@ -45,9 +45,6 @@ public class NonMedical extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(NonMedical.this, paperview.class);
                 startActivity(intent);
-
-                String templistview = parent.getItemAtPosition(position).toString();
-                intent.putExtra("title", templistview);
             }
         });
 
