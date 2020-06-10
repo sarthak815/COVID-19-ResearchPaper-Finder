@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.service.autofill.FieldClassification;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -39,6 +40,17 @@ public class NonMedical extends AppCompatActivity {
         listView = findViewById(R.id.listview);
         researchpapersArrayList = new ArrayList<>();
         loadresearchpapersList();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(NonMedical.this, paperview.class);
+                startActivity(intent);
+
+                String templistview = parent.getItemAtPosition(position).toString();
+                intent.putExtra("title", templistview);
+            }
+        });
+
     }
     private void loadresearchpapersList() {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -69,6 +81,7 @@ public class NonMedical extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
+
 
 
 }

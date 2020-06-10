@@ -25,7 +25,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String url = "https://api.jsonbin.io/b/5ed2a8bf7741ef56a564d888";
     ListView listView;
     ArrayList<researchpapers> researchpapersArrayList;
     private Object StringRequest;

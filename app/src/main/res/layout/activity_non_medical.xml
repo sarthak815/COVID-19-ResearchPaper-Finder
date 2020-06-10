@@ -6,7 +6,10 @@
     android:layout_height="match_parent"
     android:background="#373839"
     tools:context=".NonMedical">
-
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:focusableInTouchMode="true"/>
 
     <EditText
         android:id="@+id/searchEditText"
