@@ -12,9 +12,9 @@
         android:layout_width="408dp"
         android:layout_height="57dp"
         android:text="TextView"
-        android:textStyle="bold"
-        android:textColor="#FBF1F1"
         android:textAlignment="center"
+        android:textColor="#FBF1F1"
+        android:textStyle="bold"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -45,9 +45,19 @@
         android:layout_width="79dp"
         android:layout_height="28dp"
         android:layout_marginTop="294dp"
-        android:text="Citation"
+        android:text="Abstract"
         app:layout_constraintTop_toBottomOf="@+id/title1"
         tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="79dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="392dp"
+        android:text="Citation"
+        android:textColor="#FBF1F1"
+        app:layout_constraintTop_toBottomOf="@+id/title1"
+        tools:layout_editor_absoluteX="13dp" />
 
     <Button
         android:id="@+id/open"
@@ -67,27 +77,44 @@
         android:id="@+id/author"
         android:layout_width="249dp"
         android:layout_height="58dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         android:textColor="#FBF1F1"
-        app:layout_constraintTop_toBottomOf="@+id/title1"
-        tools:layout_editor_absoluteX="146dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title1" />
 
     <TextView
         android:id="@+id/journal"
-        android:textColor="#FBF1F1"
         android:layout_width="249dp"
         android:layout_height="58dp"
         android:layout_marginTop="172dp"
+        android:layout_marginEnd="24dp"
 
-        app:layout_constraintTop_toBottomOf="@+id/title1"
-        tools:layout_editor_absoluteX="146dp" />
+        android:layout_marginRight="24dp"
+        android:textColor="#FBF1F1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title1" />
+
+    <TextView
+        android:id="@+id/abstract1"
+        android:layout_width="249dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="292dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:textColor="#FBF1F1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title1" />
 
     <TextView
         android:id="@+id/citations"
-        android:textColor="#FBF1F1"
         android:layout_width="249dp"
         android:layout_height="58dp"
-        android:layout_marginTop="294dp"
-        app:layout_constraintTop_toBottomOf="@+id/title1"
-        tools:layout_editor_absoluteX="146dp" />
+        android:layout_marginTop="392dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:textColor="#FBF1F1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title1" />
 </androidx.constraintlayout.widget.ConstraintLayout>
