@@ -20,13 +20,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Medical" />
-        <activity android:name=".NonMedical">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".NonMedical"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+
     </application>
 
 </manifest>
