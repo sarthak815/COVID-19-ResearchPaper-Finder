@@ -3,118 +3,144 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#373839"
+    android:background="#232b2b"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/title1"
         android:layout_width="408dp"
-        android:layout_height="57dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
         android:text="TextView"
         android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="25sp"
         android:textColor="#FBF1F1"
         android:textStyle="bold"
-
+        android:background="#0e1111"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
-        android:textColor="#FBF1F1"
-        android:layout_width="79dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="55dp"
+        android:layout_width="80dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="304dp"
+        android:layout_marginRight="304dp"
         android:text="Author"
-        app:layout_constraintTop_toBottomOf="@+id/title1"
-        tools:layout_editor_absoluteX="13dp" />
+        android:textColor="#FBF1F1"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title1" />
 
     <TextView
         android:id="@+id/textView4"
-        android:textColor="#FBF1F1"
-        android:layout_width="79dp"
+        android:layout_width="wrap_content"
         android:layout_height="28dp"
-        android:layout_marginTop="172dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="300dp"
+        android:layout_marginRight="300dp"
         android:text="Journal"
-        app:layout_constraintTop_toBottomOf="@+id/title1"
-        tools:layout_editor_absoluteX="13dp" />
+        android:textColor="#FBF1F1"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title1" />
 
     <TextView
         android:id="@+id/textView5"
-        android:textColor="#FBF1F1"
-        android:layout_width="79dp"
+        android:layout_width="wrap_content"
         android:layout_height="28dp"
-        android:layout_marginTop="294dp"
+        android:layout_marginTop="224dp"
+        android:layout_marginEnd="288dp"
+        android:layout_marginRight="288dp"
         android:text="Abstract"
-        app:layout_constraintTop_toBottomOf="@+id/title1"
-        tools:layout_editor_absoluteX="16dp" />
+        android:textColor="#FBF1F1"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title1" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="79dp"
+        android:layout_width="wrap_content"
         android:layout_height="28dp"
-        android:layout_marginTop="392dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginEnd="292dp"
+        android:layout_marginRight="292dp"
         android:text="Citation"
         android:textColor="#FBF1F1"
-        app:layout_constraintTop_toBottomOf="@+id/title1"
-        tools:layout_editor_absoluteX="13dp" />
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title1" />
 
     <Button
         android:id="@+id/open"
-        android:onClick="browser1"
-        android:layout_width="305dp"
-        android:layout_height="84dp"
+        android:layout_width="263dp"
+        android:layout_height="62dp"
         android:layout_marginTop="126dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginRight="52dp"
-        android:layout_marginBottom="112dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginRight="72dp"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/curvedbutton"
+        android:onClick="browser1"
         android:text="Open"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
         android:id="@+id/author"
-        android:layout_width="249dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_width="246dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="56dp"
         android:textColor="#FBF1F1"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.901"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title1" />
 
     <TextView
         android:id="@+id/journal"
-        android:layout_width="249dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="172dp"
-        android:layout_marginEnd="24dp"
-
-        android:layout_marginRight="24dp"
+        android:layout_width="246dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="140dp"
+        android:textSize="20sp"
         android:textColor="#FBF1F1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.884"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title1" />
 
     <TextView
         android:id="@+id/abstract1"
+        android:scrollbars = "vertical"
         android:layout_width="249dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="292dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="224dp"
+        android:textSize="20sp"
         android:textColor="#FBF1F1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title1" />
 
     <TextView
         android:id="@+id/citations"
-        android:layout_width="249dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="392dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_width="246dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="400dp"
         android:textColor="#FBF1F1"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.866"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

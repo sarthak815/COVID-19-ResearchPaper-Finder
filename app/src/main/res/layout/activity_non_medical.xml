@@ -6,26 +6,66 @@
     android:layout_height="match_parent"
     android:background="#373839"
     android:orientation="vertical"
-    android:weightSum="10"
-    tools:context=".NonMedical">
 
-    <TextView
-    android:id="@+id/textView"
-    android:text="Non Medical"
-    android:textStyle="bold"
-    android:textAlignment="center"
-    android:gravity="center"
-    android:textSize="25sp"
-    android:textColor="#ECECEC"
-    android:layout_width="408dp"
-    android:layout_height="60dp"
-    android:background="#0e1111"
-        android:divider="@drawable/listview_border"
-    android:layout_weight="0.3"/>
+    android:weightSum="10.05"
+    tools:context=".NonMedical">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.05"
+        android:background="#ECECEC"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:weightSum="10"
+        android:background="#0e1111"
+        android:orientation="horizontal">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.05"
+            android:background="#ECECEC"/>
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:background="#0e1111"
+            android:layout_weight="1.95"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@android:drawable/ic_menu_search" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.05"
+            android:background="#ECECEC"/>
+
+        <TextView
+        android:id="@+id/textView"
+        android:text="Non Medical"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:layout_height="match_parent"
+        android:textColor="#ECECEC"
+        android:layout_weight="7.90"
+        android:layout_width="0dp" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.05"
+            android:background="#ECECEC"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.05"
+        android:background="#ECECEC"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.95"
         android:weightSum="10"
         android:background="#0e1111"
         android:orientation="horizontal">
@@ -41,12 +81,18 @@
         <TextView
             android:layout_width="0dp"
             android:textSize="20sp"
+            android:paddingLeft="5dp"
             android:id="@+id/num_paper"
             android:textColor="#ECECEC"
             android:textAlignment="viewStart"
             android:gravity="center"
             android:layout_height="match_parent"
-            android:layout_weight="3.5"/>
+            android:layout_weight="3.45"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.05"
+            android:background="#ECECEC"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -58,16 +104,24 @@
             android:layout_weight="2.5"/>
 
 
-</LinearLayout>
-
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.04"
+        android:background="#ECECEC"/>
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_weight="8.7"
+        android:layout_weight="7.96"
         android:layout_height="0dp"
         android:background="#232b2b"
         android:divider="@drawable/listview_border"
         android:dividerHeight="2dp" />
+
+
+
+
 
 
 </LinearLayout>
