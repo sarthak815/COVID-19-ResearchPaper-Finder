@@ -51,6 +51,7 @@
 
     <Button
         android:id="@+id/open"
+        android:onClick="browser1"
         android:layout_width="305dp"
         android:layout_height="84dp"
         android:layout_marginTop="126dp"

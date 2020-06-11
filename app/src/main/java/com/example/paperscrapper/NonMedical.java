@@ -43,7 +43,11 @@ public class NonMedical extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String TempListViewClickedValue = researchpapersArrayList.get(position).getTitle().toString();
+                String link1  = researchpapersArrayList.get(position).getLink().toString();
                 Intent intent = new Intent(NonMedical.this, paperview.class);
+                intent.putExtra("ListViewClickedValue", TempListViewClickedValue);
+                intent.putExtra("link1", link1);
                 startActivity(intent);
             }
         });
