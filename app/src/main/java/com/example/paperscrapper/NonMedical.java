@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -29,17 +30,16 @@ public class NonMedical extends AppCompatActivity {
     ListView listView;
     ArrayList<researchpapers> researchpapersArrayList;
     private Object StringRequest;
+    TextView length_paper;
+    String num1;
 
-    public void previousActivity(View view){
-        Intent maninMenu = new Intent(this, MainActivity.class);
-        startActivity(maninMenu);
-    }
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_non_medical);
         listView = findViewById(R.id.listview);
         researchpapersArrayList = new ArrayList<>();
         loadresearchpapersList();
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -74,7 +74,12 @@ public class NonMedical extends AppCompatActivity {
                         researchpapersArrayList.add(researchpapers);
                         ListViewAdapter adapter = new ListViewAdapter(researchpapersArrayList, getApplicationContext());
                         listView.setAdapter(adapter);
+                        num1 = Integer.toString(i);
                     }
+                    length_paper= (TextView) findViewById(R.id.num_paper);
+
+                    length_paper.setText(num1);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

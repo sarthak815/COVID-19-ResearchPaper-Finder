@@ -1,123 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#373839"
+    android:orientation="vertical"
+    android:weightSum="10"
     tools:context=".NonMedical">
-    <View
-        android:layout_width="0dp"
+
+    <TextView
+    android:id="@+id/textView"
+    android:text="Non Medical"
+    android:textStyle="bold"
+    android:textAlignment="center"
+    android:gravity="center"
+    android:textSize="25sp"
+    android:textColor="#ECECEC"
+    android:layout_width="408dp"
+    android:layout_height="60dp"
+    android:background="#0e1111"
+        android:divider="@drawable/listview_border"
+    android:layout_weight="0.3"/>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:focusableInTouchMode="true"/>
+        android:layout_weight="1"
+        android:weightSum="10"
+        android:background="#0e1111"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:layout_weight="4"
+            android:text="Paper Couner:"
+            android:textAlignment="viewEnd"
+            android:textColor="#ECECEC"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="0dp"
+            android:textSize="20sp"
+            android:id="@+id/num_paper"
+            android:textColor="#ECECEC"
+            android:textAlignment="viewStart"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_weight="3.5"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textColor="#ECECEC"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:text="Citations"
+            android:layout_weight="2.5"/>
 
-    <EditText
-        android:id="@+id/searchEditText"
-        android:layout_width="274dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginLeft="29dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="88dp"
-        android:layout_marginRight="88dp"
-        android:layout_marginBottom="564dp"
-        android:background="@color/design_default_color_on_primary"
-        android:ems="10"
-        android:hint="@string/search"
-        android:inputType="textPersonName"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchTextView" />
 
-    <TextView
-        android:id="@+id/searchTextView"
-        android:layout_width="188dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginTop="63dp"
-        android:layout_marginEnd="196dp"
-        android:layout_marginRight="196dp"
-        android:layout_marginBottom="628dp"
-        android:text="@string/search"
-        android:textColor="#FBF1F1"
-        android:textColorHint="#F6F6F6"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/searchButton"
-        android:layout_width="63dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginLeft="9dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="564dp"
-        android:text="Go!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/searchEditText"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/mainMenuButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="29dp"
-        android:layout_marginLeft="29dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="279dp"
-        android:layout_marginRight="279dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="previousActivity"
-        android:text="@string/main_menu"
-        app:layout_constraintBottom_toTopOf="@+id/searchTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/nonMedicalTextView"
-        android:layout_width="151dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="94dp"
-        android:layout_marginLeft="94dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginRight="56dp"
-        android:layout_marginBottom="62dp"
-        android:gravity="fill_horizontal"
-        android:text="@string/non_medical"
-        android:textColor="#F1EAEA"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/searchButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/mainMenuButton"
-        app:layout_constraintTop_toTopOf="parent" />
+</LinearLayout>
 
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="278dp"
-        android:background="#FFFFFF"
+        android:layout_weight="8.7"
+        android:layout_height="0dp"
+        android:background="#232b2b"
         android:divider="@drawable/listview_border"
-        android:dividerHeight="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchEditText"
-        app:layout_constraintVertical_bias="0.495"
-        tools:layout_editor_absoluteX="0dp" />
+        android:dividerHeight="2dp" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

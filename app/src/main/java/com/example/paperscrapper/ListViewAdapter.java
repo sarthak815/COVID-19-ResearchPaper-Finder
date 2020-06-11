@@ -16,6 +16,7 @@ public class ListViewAdapter extends ArrayAdapter<researchpapers> {
     List<researchpapers> paperlist;
     Context context;
 
+
     public ListViewAdapter(List<researchpapers> paperlist, Context context) {
         super(context, R.layout.nonmed_list, paperlist);
         this.paperlist = paperlist;
@@ -29,10 +30,12 @@ public class ListViewAdapter extends ArrayAdapter<researchpapers> {
         LayoutInflater inflater = LayoutInflater.from(context);
         View listviewitem = inflater.inflate(R.layout.nonmed_list, null, true);
         TextView name = listviewitem.findViewById(R.id.name);
-        TextView url = listviewitem.findViewById(R.id.url);
+        TextView citations = listviewitem.findViewById(R.id.citation2);
         researchpapers researchpapers = paperlist.get(position);
         name.setText(researchpapers.getTitle());
-        url.setText(researchpapers.getLink());
+        String num = String.valueOf(researchpapers.getCitations());
+        String str[] = num.split(".");
+        citations.setText(num);
 
         return listviewitem;
     }
