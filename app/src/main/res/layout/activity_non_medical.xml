@@ -34,7 +34,7 @@
             android:layout_height="match_parent"
             android:textSize="20sp"
             android:layout_weight="4"
-            android:text="Paper Couner:"
+            android:text="Paper Counter:"
             android:textAlignment="viewEnd"
             android:textColor="#ECECEC"
             android:gravity="center"/>
