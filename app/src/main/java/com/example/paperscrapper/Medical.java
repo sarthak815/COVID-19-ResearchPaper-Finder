@@ -2,6 +2,7 @@ package com.example.paperscrapper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -61,9 +62,11 @@ public class Medical extends AppCompatActivity {
 
     }
     private void loadresearchpapersList() {
+        final ProgressDialog dialog = ProgressDialog.show(this, null, "Please Wait");
         com.android.volley.toolbox.StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                dialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("result");
@@ -80,6 +83,7 @@ public class Medical extends AppCompatActivity {
                     length_paper.setText(num1);
 
                 } catch (JSONException e) {
+                    dialog.dismiss();
                     e.printStackTrace();
                 }
             }

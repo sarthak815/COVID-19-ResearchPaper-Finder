@@ -62,10 +62,24 @@
         android:layout_height="0dp"
         android:layout_weight="0.05"
         android:background="#ECECEC"/>
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_weight="7.96"
+        android:layout_height="0dp"
+        android:background="#232b2b"
+        android:divider="@drawable/listview_border"
+        android:dividerHeight="2dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.04"
+        android:background="#ECECEC"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.95"
+        android:layout_weight="0.91"
         android:weightSum="10"
         android:background="#0e1111"
         android:orientation="horizontal">
@@ -110,15 +124,6 @@
         android:layout_height="0dp"
         android:layout_weight="0.04"
         android:background="#ECECEC"/>
-    <ListView
-        android:id="@+id/listview"
-        android:layout_width="match_parent"
-        android:layout_weight="7.96"
-        android:layout_height="0dp"
-        android:background="#232b2b"
-        android:divider="@drawable/listview_border"
-        android:dividerHeight="2dp" />
-
 
 
 

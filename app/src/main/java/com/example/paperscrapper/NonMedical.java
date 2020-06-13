@@ -2,6 +2,7 @@ package com.example.paperscrapper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.service.autofill.FieldClassification;
@@ -62,9 +63,12 @@ public class NonMedical extends AppCompatActivity {
 
     }
     private void loadresearchpapersList() {
+        final ProgressDialog dialog = ProgressDialog.show(this, null, "Please Wait");
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+
             @Override
             public void onResponse(String response) {
+                dialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("result");
@@ -81,12 +85,14 @@ public class NonMedical extends AppCompatActivity {
                     length_paper.setText(num1);
 
                 } catch (JSONException e) {
+                    dialog.dismiss();
                     e.printStackTrace();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
                 Toast.makeText(getApplicationContext(), "There is an error", Toast.LENGTH_LONG).show();
 
             }
