@@ -12,7 +12,7 @@
         android:id="@+id/title1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1.5"
+        android:layout_weight="1.2"
         android:background="#0e1111"
         android:gravity="center"
         android:paddingLeft="30dp"
@@ -23,6 +23,11 @@
         android:textSize="25sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteY="2dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.05"
+        android:background="#ECECEC"/>
     <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
@@ -56,6 +61,11 @@
             tools:layout_editor_absoluteY="92dp" />
 
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.05"
+        android:background="#ECECEC"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -88,6 +98,11 @@
         tools:layout_editor_absoluteX="218dp"
         tools:layout_editor_absoluteY="172dp" />
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.05"
+        android:background="#ECECEC"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -118,6 +133,11 @@
             tools:layout_editor_absoluteX="214dp"
             tools:layout_editor_absoluteY="288dp" />
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.05"
+        android:background="#ECECEC"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -148,6 +168,11 @@
             tools:layout_editor_absoluteX="215dp"
             tools:layout_editor_absoluteY="472dp" />
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.05"
+        android:background="#ECECEC"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -166,6 +191,11 @@
             android:textSize="25sp"
             tools:layout_editor_absoluteX="74dp"
             tools:layout_editor_absoluteY="618dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.05"
+            android:background="#ECECEC"/>
     </LinearLayout>
 
 
