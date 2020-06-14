@@ -9,11 +9,7 @@
 
     android:weightSum="10.05"
     tools:context=".NonMedical">
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.05"
-        android:background="#ECECEC"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -57,6 +53,19 @@
             android:background="#ECECEC"/>
 
     </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.04"
+        android:background="#ECECEC"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listview1"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_weight="7.96"
+        android:layout_height="0dp"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -110,16 +119,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.04"
+        android:layout_weight="0.05"
         android:background="#ECECEC"/>
-    <ListView
-        android:id="@+id/listview1"
-        android:layout_width="match_parent"
-        android:layout_weight="7.96"
-        android:layout_height="0dp"
-        android:background="#232b2b"
-        android:divider="@drawable/listview_border"
-        android:dividerHeight="2dp" />
 
 
 

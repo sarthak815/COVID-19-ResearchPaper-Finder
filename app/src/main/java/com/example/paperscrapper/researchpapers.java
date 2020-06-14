@@ -1,8 +1,8 @@
 package com.example.paperscrapper;
 
-public class researchpapers {
+public class Researchpapers {
     String Title, link,authors,journal,citations,abstract1;
-    public researchpapers(String Title,  String link, String authors,String journal, String citations, String abstract1){
+    public Researchpapers(String Title,  String link, String authors,String journal, String citations, String abstract1){
         this.Title = Title;
         this.link = link;
         this.authors = authors;

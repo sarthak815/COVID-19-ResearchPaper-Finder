@@ -26,8 +26,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     ListView listView;
-    ArrayList<researchpapers> researchpapersArrayList;
-    private Object StringRequest;
 
     public void getNewActivity(View view) {
         try {

@@ -1,6 +1,8 @@
 package com.example.paperscrapper;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -28,8 +30,8 @@ import java.util.ArrayList;
 
 public class NonMedical extends AppCompatActivity {
     private static final String url = "https://whispering-beyond-66252.herokuapp.com/data/all";
-    ListView listView;
-    ArrayList<researchpapers> researchpapersArrayList;
+    RecyclerView listView;
+    ArrayList<Researchpapers> researchpapersArrayList;
     private Object StringRequest;
     TextView length_paper;
     String num1;
@@ -37,29 +39,10 @@ public class NonMedical extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_non_medical);
-        listView = findViewById(R.id.listview);
+        listView = (RecyclerView)findViewById(R.id.listview);
         researchpapersArrayList = new ArrayList<>();
         loadresearchpapersList();
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String TempListViewClickedValue = researchpapersArrayList.get(position).getTitle().toString();
-                String link1  = researchpapersArrayList.get(position).getLink().toString();
-                String authors1  = researchpapersArrayList.get(position).getAuthors().toString();
-                String journal1  = researchpapersArrayList.get(position).getJournal().toString();
-                String citations1  = researchpapersArrayList.get(position).getCitations().toString();
-                String abstract2 = researchpapersArrayList.get(position).getAbstract1().toString();
-                Intent intent = new Intent(NonMedical.this, paperview.class);
-                intent.putExtra("ListViewClickedValue", TempListViewClickedValue);
-                intent.putExtra("authors1", authors1 );
-                intent.putExtra("journal1", journal1);
-                intent.putExtra("citations1", citations1);
-                intent.putExtra("link1", link1);
-                intent.putExtra("abstract2", abstract2);
-                startActivity(intent);
-            }
-        });
 
     }
     private void loadresearchpapersList() {
@@ -74,10 +57,11 @@ public class NonMedical extends AppCompatActivity {
                     JSONArray jsonArray = jsonObject.getJSONArray("result");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                        researchpapers researchpapers = new researchpapers(jsonObject1.getString("Title"), jsonObject1.getString("link"),jsonObject1.getString("authors"),jsonObject1.getString("journal domain"),jsonObject1.getString("citations"),jsonObject1.getString("abstract"));
+                        Researchpapers researchpapers = new Researchpapers(jsonObject1.getString("Title"), jsonObject1.getString("link"),jsonObject1.getString("authors"),jsonObject1.getString("journal domain"),jsonObject1.getString("citations"),jsonObject1.getString("abstract"));
                         researchpapersArrayList.add(researchpapers);
                         ListViewAdapter adapter = new ListViewAdapter(researchpapersArrayList, getApplicationContext());
                         listView.setAdapter(adapter);
+                        listView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         num1 = Integer.toString(i);
                     }
                     length_paper= (TextView) findViewById(R.id.num_paper);
