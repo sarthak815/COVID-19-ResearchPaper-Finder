@@ -7,11 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.service.autofill.FieldClassification;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,10 +32,17 @@ public class NonMedical extends AppCompatActivity {
     TextView length_paper;
     String num1;
 
+
+    public void search(View view) {
+        Intent searchActivity = new Intent(NonMedical.this, SearchActivity.class);
+        searchActivity.putExtra("domain", "non-med");
+        startActivity(searchActivity);
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_non_medical);
-        listView = (RecyclerView)findViewById(R.id.listview);
+        listView = (RecyclerView)findViewById(R.id.searchListView);
         researchpapersArrayList = new ArrayList<>();
         loadresearchpapersList();
 

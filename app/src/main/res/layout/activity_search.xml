@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchActivity">
+
+    <EditText
+        android:id="@+id/searchEditText"
+        android:layout_width="386dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/search"
+        android:inputType="textPersonName"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.037" />
+
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="88dp"
+        android:layout_height="44dp"
+        android:onClick="search"
+        android:text="@string/search"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.094" />
+
+    <ListView
+        android:id="@+id/searchListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7.96"
+        android:background="#232b2b"
+        android:divider="@drawable/listview_border"
+        android:dividerHeight="2dp"
+        tools:layout_editor_absoluteY="122dp"
+        tools:visibility="visible">
+
+    </ListView>
+
+    <TextView
+        android:id="@+id/numberTextView"
+        android:layout_width="52dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="88dp"
+        android:gravity="center"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/searchListView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.211"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/paperLengthTextView"
+        android:layout_width="55dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="72dp"
+        android:text="No of Papers"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/searchListView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
