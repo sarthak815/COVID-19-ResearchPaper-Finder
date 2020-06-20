@@ -51,6 +51,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
                 String citations1  = paperlist.get(position).getCitations().toString();
                 String abstract2 = paperlist.get(position).getAbstract1().toString();
                 Intent intent = new Intent(context, paperview.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("ListViewClickedValue", TempListViewClickedValue);
                 intent.putExtra("authors1", authors1 );
                 intent.putExtra("journal1", journal1);

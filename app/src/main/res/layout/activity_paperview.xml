@@ -184,6 +184,7 @@
             android:layout_width="264dp"
             android:layout_height="78dp"
             android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginLeft="70dp"
             android:background="@drawable/curvedbutton"
             android:onClick="browser1"
@@ -191,11 +192,7 @@
             android:textSize="25sp"
             tools:layout_editor_absoluteX="74dp"
             tools:layout_editor_absoluteY="618dp" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.05"
-            android:background="#ECECEC"/>
+
     </LinearLayout>
 
 

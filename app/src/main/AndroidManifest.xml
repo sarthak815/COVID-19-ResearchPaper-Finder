@@ -10,9 +10,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:screenOrientation="locked"
         android:theme="@style/HiddenTitleTheme">
-        <activity android:name=".paperview"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".paperview"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

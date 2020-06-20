@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="#373839"
     android:orientation="vertical"
-
+    android:paddingLeft="3dp"
+    android:paddingRight="3dp"
     android:weightSum="10.05"
     tools:context=".NonMedical">
     <View
@@ -62,6 +63,40 @@
         android:layout_height="0dp"
         android:layout_weight="0.05"
         android:background="#ECECEC"/>
+    <ProgressBar
+        android:indeterminateDrawable="@drawable/circular_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/progressBar1"
+        android:layout_gravity="center"
+        android:layout_weight="7"
+        android:visibility="gone" />
+    <TextView
+    android:id="@+id/loading_text1"
+    android:background="#696969"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1.96"
+    android:text="10000+ papers already present and counting"
+    android:textStyle="bold"
+    android:textSize="30sp"
+    android:textColor="#ECECEC"
+    android:gravity="center"
+    android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/loading_text2"
+        android:background="#696969"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.96"
+        android:text="Almost there..."
+        android:textStyle="bold"
+        android:textSize="45sp"
+        android:textColor="#ECECEC"
+        android:gravity="center"
+        android:visibility="gone"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listview"
