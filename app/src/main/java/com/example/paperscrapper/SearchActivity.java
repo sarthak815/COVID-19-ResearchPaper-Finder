@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,22 +47,33 @@ public class SearchActivity extends AppCompatActivity {
     //variable for setting the number of papers in the view
     String numberOfPapers;
     ArrayList<Researchpapers> researchpapersArrayList;
+    String nonMed;
+    String med;
 
 
 
+    //this function closes the keyboard when it is called
     private void closeKeyboard() {
-        View view = getCurrentFocus();
+        View view = getCurrentFocus(); //gets the view currently in focus
+
+        //check if something is in focus or not
         if (view != null) {
+
+            //get the input manager and close the keyboard
             InputMethodManager manageKeyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             manageKeyboard.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
+
 
     //The variable "domain" contains a string that contains "med" or "non-med" to search in the respective Data Bases
     //domain = med / non-med
     String domain;
 
     public void search(View view) {
+        med = "med";
+        nonMed = "non-med";
 
         //calling the function closeKeyboard to close keyboard
         closeKeyboard();
@@ -74,16 +86,22 @@ public class SearchActivity extends AppCompatActivity {
         Log.i("Searched", jsonInputString.toString());//adding the searchQuery to the log
 
         //URL type variable to store the url to Post Request
-        URL url;
+        URL url = null;
         //to open up the connection
         HttpURLConnection connection = null;
 
         //checking for what database to look the search query into
-        if(domain == "non-med") {
+        if(domain.equals(nonMed)) {
             //set the url for non-med database
-            url = new URL("https://whispering-beyond-66252.herokuapp.com/data/postreqALL");
+            try {
+                url = new URL("https://whispering-beyond-66252.herokuapp.com/data/postreqALL");
+            } catch(Exception e) {
+            e.printStackTrace();
+        }
 
-        } else if (domain == "med") {
+        } else if (domain.equals(med)) {
+
+            return;
 
         } else {
             //Showing the error message to the log and toast
@@ -139,9 +157,9 @@ public class SearchActivity extends AppCompatActivity {
                 for (i = 0; i < jsonArray.length(); i++) {
 
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                    Researchpapers researchpapers = new researchpapers(jsonObject1.getString("Title"), jsonObject1.getString("link"),jsonObject1.getString("authors"),jsonObject1.getString("journal domain"),jsonObject1.getString("citations"),jsonObject1.getString("abstract"));
+                    Researchpapers researchpapers = new Researchpapers(jsonObject1.getString("Title"), jsonObject1.getString("link"),jsonObject1.getString("authors"),jsonObject1.getString("journal domain"),jsonObject1.getString("citations"),jsonObject1.getString("abstract"));
                     researchpapersArrayList.add(researchpapers);
-                    ListViewAdapter adapter = new ListViewAdapter(researchpapersArrayList, getApplicationContext());
+                    searchListViewAdapter adapter = new searchListViewAdapter(researchpapersArrayList, getApplicationContext());
                     searchListView.setAdapter(adapter);
                 }
                 numberOfPapers = Integer.toString(i);
@@ -155,7 +173,6 @@ public class SearchActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-    }
     }
 
     @Override
@@ -192,7 +209,7 @@ public class SearchActivity extends AppCompatActivity {
                 String journal1 = researchpapersArrayList.get(position).getJournal().toString();
                 String citations1 = researchpapersArrayList.get(position).getCitations().toString();
                 String abstract2 = researchpapersArrayList.get(position).getAbstract1().toString();
-                Intent paperView = new Intent(NonMedical.this, paperview.class);
+                Intent paperView = new Intent(SearchActivity.this, paperview.class);
                 paperView.putExtra("ListViewClickedValue", TempListViewClickedValue);
                 paperView.putExtra("authors1", authors1 );
                 paperView.putExtra("journal1", journal1);

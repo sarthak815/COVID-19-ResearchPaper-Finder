@@ -18,6 +18,7 @@
         android:gravity="center"
         android:hint="@string/search"
         android:inputType="textPersonName"
+        android:onClick="search"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,20 +38,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.094" />
-
-    <ListView
-        android:id="@+id/searchListView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="7.96"
-        android:background="#232b2b"
-        android:divider="@drawable/listview_border"
-        android:dividerHeight="2dp"
-        tools:layout_editor_absoluteY="122dp"
-        tools:visibility="visible">
-
-    </ListView>
+        app:layout_constraintVertical_bias="0.114" />
 
     <TextView
         android:id="@+id/numberTextView"
@@ -66,6 +54,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+
     <TextView
         android:id="@+id/paperLengthTextView"
         android:layout_width="55dp"
@@ -75,7 +64,25 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/searchListView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintHorizontal_bias="0.028"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.011" />
+
+    <ListView
+        android:id="@+id/searchListView"
+        android:layout_width="411dp"
+        android:layout_height="587dp"
+        android:layout_weight="7.96"
+        android:divider="@drawable/listview_border"
+        android:dividerHeight="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchButton"
+        app:layout_constraintVertical_bias="1.0"
+        tools:visibility="visible">
+
+    </ListView>
 </androidx.constraintlayout.widget.ConstraintLayout>
