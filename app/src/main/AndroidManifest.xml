@@ -10,10 +10,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:screenOrientation="locked"
         android:theme="@style/HiddenTitleTheme">
-        <activity android:name=".SearchActivity"></activity>
-        <activity android:name=".paperview" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".paperview"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +22,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Medical" />
-        <activity android:name=".NonMedical" />
+        <activity android:name=".NonMedical"/>
+
+
     </application>
 
 </manifest>

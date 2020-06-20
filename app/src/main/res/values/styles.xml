@@ -2,6 +2,7 @@
 
     <!-- Base application theme. -->
     <style name="HiddenTitleTheme" parent="AppTheme">
+        <item name="android:statusBarColor">@color/theme_color</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
     </style>

@@ -7,7 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.service.autofill.FieldClassification;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,34 +34,49 @@ import java.util.ArrayList;
 public class NonMedical extends AppCompatActivity {
     private static final String url = "https://whispering-beyond-66252.herokuapp.com/data/all";
     RecyclerView listView;
+    private ProgressBar spinner;
     ArrayList<Researchpapers> researchpapersArrayList;
-    private Object StringRequest;
-    TextView length_paper;
+
+    TextView length_paper, loading_text1, loading_text2;
     String num1;
-
-
-    public void search(View view) {
-        Intent searchActivity = new Intent(NonMedical.this, SearchActivity.class);
-        searchActivity.putExtra("domain", "non-med");
-        startActivity(searchActivity);
-    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_non_medical);
-        listView = (RecyclerView)findViewById(R.id.searchListView);
+        listView = (RecyclerView)findViewById(R.id.listview);
         researchpapersArrayList = new ArrayList<>();
+        spinner=(ProgressBar)findViewById(R.id.progressBar1);
+        loading_text1 = (TextView)findViewById(R.id.loading_text1);
+        loading_text2 = (TextView) findViewById(R.id.loading_text2);
+        spinner.setVisibility(View.GONE);
+        loading_text1.setVisibility(View.GONE);
+        loading_text2.setVisibility(View.GONE);
         loadresearchpapersList();
 
 
     }
     private void loadresearchpapersList() {
-        final ProgressDialog dialog = ProgressDialog.show(this, null, "Please Wait");
+        spinner.setVisibility(View.VISIBLE);
+        loading_text1.setVisibility(View.VISIBLE);
+
+        final View v = loading_text1; // your view
+        loading_text1.postDelayed(new Runnable() {
+            public void run() {
+                    TranslateAnimation animate = new TranslateAnimation(0, v.getWidth(),0,0);
+                    animate.setDuration(500);
+                    animate.setFillAfter(true);
+                    v.startAnimation(animate);
+                    v.setVisibility(View.GONE);
+
+                    loading_text2.setVisibility(View.VISIBLE);
+                }
+
+        }, 7000);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
-                dialog.dismiss();
+
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("result");
@@ -65,14 +87,19 @@ public class NonMedical extends AppCompatActivity {
                         ListViewAdapter adapter = new ListViewAdapter(researchpapersArrayList, getApplicationContext());
                         listView.setAdapter(adapter);
                         listView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                        num1 = Integer.toString(i);
+                        num1 = Integer.toString(i+1);
                     }
+                    spinner.setVisibility(View.GONE);
+                    loading_text1.setVisibility(View.GONE);
+                    loading_text2.setVisibility(View.GONE);
                     length_paper= (TextView) findViewById(R.id.num_paper);
 
                     length_paper.setText(num1);
 
                 } catch (JSONException e) {
-                    dialog.dismiss();
+                    spinner.setVisibility(View.GONE);
+                    loading_text1.setVisibility(View.GONE);
+                    loading_text2.setVisibility(View.GONE);
                     e.printStackTrace();
                 }
             }
