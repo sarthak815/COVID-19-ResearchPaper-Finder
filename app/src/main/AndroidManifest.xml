@@ -13,6 +13,8 @@
         android:screenOrientation="locked"
         android:theme="@style/HiddenTitleTheme">
         <activity android:name=".paperview"/>
+        <activity android:name=".SearchActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>

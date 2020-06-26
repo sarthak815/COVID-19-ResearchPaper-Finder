@@ -29,13 +29,20 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Medical extends AppCompatActivity {
-    private static final String url = "https://whispering-beyond-66252.herokuapp.com/data/all";
+    private static final String url = "https://raw.githubusercontent.com/sarthak815/covid19data/master/covid2.txt";
     private ProgressBar spinner;
     RecyclerView listView;
     ArrayList<Researchpapers> researchpapersArrayList;
 
     TextView length_paper, loading_text, loading_text2;
     String num1;
+
+    public void search(View view) {
+        Intent searchActivity = new Intent(Medical.this, SearchActivity.class);
+        searchActivity.putExtra("domain", "med");
+        startActivity(searchActivity);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +52,9 @@ public class Medical extends AppCompatActivity {
         researchpapersArrayList = new ArrayList<>();
         spinner=(ProgressBar)findViewById(R.id.progressBar);
         loading_text = (TextView)findViewById(R.id.loading_text);
-        loading_text2 = (TextView)findViewById(R.id.loading_text2_med);
+
         spinner.setVisibility(View.GONE);
-        loading_text2.setVisibility(View.GONE);
+
         loading_text.setVisibility(View.GONE);
         loadresearchpapersList();
 
@@ -58,19 +65,7 @@ public class Medical extends AppCompatActivity {
         spinner.setVisibility(View.VISIBLE);
         loading_text.setVisibility(View.VISIBLE);
 
-        final View v = loading_text; // your view
-        loading_text.postDelayed(new Runnable() {
-            public void run() {
-                TranslateAnimation animate = new TranslateAnimation(0, v.getWidth(),0,0);
-                animate.setDuration(500);
-                animate.setFillAfter(true);
-                v.startAnimation(animate);
-                v.setVisibility(View.GONE);
 
-                loading_text2.setVisibility(View.VISIBLE);
-            }
-
-        }, 7000);
 
         com.android.volley.toolbox.StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -93,11 +88,11 @@ public class Medical extends AppCompatActivity {
                     length_paper.setText(num1);
                     spinner.setVisibility(View.GONE);
                     loading_text.setVisibility(View.GONE);
-                    loading_text2.setVisibility(View.GONE);
+
                 } catch (JSONException e) {
                     spinner.setVisibility(View.GONE);
                     loading_text.setVisibility(View.GONE);
-                    loading_text2.setVisibility(View.GONE);
+
                     e.printStackTrace();
                 }
             }

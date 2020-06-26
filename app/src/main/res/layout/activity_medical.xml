@@ -34,6 +34,7 @@
             android:background="#0e1111"
             android:layout_weight="1.95"
             android:layout_width="0dp"
+            android:onClick="search"
             android:layout_height="match_parent"
             app:srcCompat="@android:drawable/ic_menu_search" />
         <View
@@ -84,18 +85,6 @@
         android:text="10000+ papers already present and counting"
         android:textStyle="bold"
         android:textSize="30sp"
-        android:textColor="#ECECEC"
-        android:gravity="center"
-        android:visibility="gone"/>
-    <TextView
-        android:id="@+id/loading_text2_med"
-        android:background="#696969"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.96"
-        android:text="Almost there..."
-        android:textStyle="bold"
-        android:textSize="45sp"
         android:textColor="#ECECEC"
         android:gravity="center"
         android:visibility="gone"/>

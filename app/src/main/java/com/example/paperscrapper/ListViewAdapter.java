@@ -67,7 +67,9 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
     public int getItemCount() {
         return this.paperlist.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder {
+
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView name;
         private TextView citations2;
         private View parentView;

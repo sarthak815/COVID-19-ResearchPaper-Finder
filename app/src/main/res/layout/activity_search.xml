@@ -1,88 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#373839"
+    android:orientation="vertical"
+    android:paddingLeft="3dp"
+    android:paddingRight="3dp"
+    android:weightSum="10"
     tools:context=".SearchActivity">
 
-    <EditText
-        android:id="@+id/searchEditText"
-        android:layout_width="386dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/search"
-        android:inputType="textPersonName"
-        android:onClick="search"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.037" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:weightSum="9.95"
+        android:background="#0e1111"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/searchButton"
-        android:layout_width="88dp"
-        android:layout_height="44dp"
-        android:onClick="search"
-        android:text="@string/search"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.114" />
 
+       <EditText
+           android:layout_width="0dp"
+           android:layout_height="match_parent"
+           android:layout_weight="8"
+           android:hint="search"
+           android:id="@+id/searchEditText"
+           android:singleLine="true"
+           android:background="@null"
+
+           android:textColor="#ECECEC"/>
+        <ImageButton
+            android:id="@+id/searchButton"
+            android:background="#2F4F4F"
+            android:layout_weight="1.95"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:onClick="search"
+            app:srcCompat="@android:drawable/ic_menu_search" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.05"
+        android:background="#ECECEC"/>
+    <ProgressBar
+        android:indeterminateDrawable="@drawable/circular_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/progressBar_search"
+        android:layout_gravity="center"
+        android:layout_weight="7"
+        android:visibility="gone" />
     <TextView
-        android:id="@+id/numberTextView"
-        android:layout_width="52dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="88dp"
-        android:gravity="center"
-        android:text="0"
-        app:layout_constraintBottom_toBottomOf="@+id/searchListView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.211"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-
-    <TextView
-        android:id="@+id/paperLengthTextView"
-        android:layout_width="55dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="72dp"
-        android:text="No of Papers"
+        android:id="@+id/loading_text_search"
+        android:background="#696969"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.96"
+        android:text=""
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/searchListView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.028"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.011" />
+        android:textSize="30sp"
+        android:textColor="#ECECEC"
+        android:gravity="center"
+        android:visibility="gone"/>
+
 
     <ListView
         android:id="@+id/searchListView"
-        android:layout_width="411dp"
-        android:layout_height="587dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="7.96"
         android:divider="@drawable/listview_border"
-        android:dividerHeight="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchButton"
-        app:layout_constraintVertical_bias="1.0"
-        tools:visibility="visible">
+        android:dividerHeight="2dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.04"
+        android:background="#ECECEC"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.91"
+        android:weightSum="10"
+        android:background="#0e1111"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:layout_weight="4"
+            android:text="Paper Counter:"
+            android:textAlignment="viewEnd"
+            android:textColor="#ECECEC"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="0dp"
+            android:textSize="20sp"
+            android:paddingLeft="5dp"
+            android:id="@+id/numberTextView"
+            android:textColor="#ECECEC"
+            android:textAlignment="viewStart"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_weight="3.45"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.05"
+            android:background="#ECECEC"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textColor="#ECECEC"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:text="Citations"
+            android:layout_weight="2.5"/>
 
-    </ListView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.04"
+        android:background="#ECECEC"/>
+
+
+
+
+
+</LinearLayout>

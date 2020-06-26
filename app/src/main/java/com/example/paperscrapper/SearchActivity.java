@@ -1,19 +1,27 @@
 package com.example.paperscrapper;
 
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,17 +51,20 @@ public class SearchActivity extends AppCompatActivity {
 
     EditText searchEditText;
     ListView searchListView;
-    TextView numberTextView;
+    TextView numberTextView, loading_text1;
     //variable for setting the number of papers in the view
     String numberOfPapers;
     ArrayList<Researchpapers> researchpapersArrayList;
     String nonMed;
     String med;
+    private ProgressBar spinner;
+    Button search;
 
 
 
     //this function closes the keyboard when it is called
     private void closeKeyboard() {
+
         View view = getCurrentFocus(); //gets the view currently in focus
 
         //check if something is in focus or not
@@ -67,17 +78,24 @@ public class SearchActivity extends AppCompatActivity {
 
 
 
+
+
     //The variable "domain" contains a string that contains "med" or "non-med" to search in the respective Data Bases
     //domain = med / non-med
     String domain;
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void search(View view) {
+
+
+        spinner.setVisibility(View.VISIBLE);
+        loading_text1.setVisibility(View.VISIBLE);
         med = "med";
         nonMed = "non-med";
 
         //calling the function closeKeyboard to close keyboard
-        closeKeyboard();
 
+        closeKeyboard();
         //get the search query and store it in the variable searchQuery
         String searchQuery = searchEditText.getText().toString();
 
@@ -94,16 +112,21 @@ public class SearchActivity extends AppCompatActivity {
         if(domain.equals(nonMed)) {
             //set the url for non-med database
             try {
-                url = new URL("https://whispering-beyond-66252.herokuapp.com/data/postreqALL");
+                url = new URL("https://testingdeploy1307.herokuapp.com/data/NonMedical/postreqALL");
             } catch(Exception e) {
-            e.printStackTrace();
-        }
+                closeKeyboard();
+                e.printStackTrace();
+            }
 
         } else if (domain.equals(med)) {
-
-            return;
-
+            try {
+                url = new URL("https://testingdeploy1307.herokuapp.com/data/Medical/postreqALL");
+            } catch(Exception e) {
+                closeKeyboard();
+                e.printStackTrace();
+            }
         } else {
+            closeKeyboard();
             //Showing the error message to the log and toast
             Log.i("Error", "The database " + domain +" does not exist");
             Toast.makeText(getApplicationContext(), "The database " + domain +" does not exist", Toast.LENGTH_LONG).show();
@@ -111,6 +134,8 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         try {
+            spinner.setVisibility(View.VISIBLE);
+            loading_text1.setVisibility(View.VISIBLE);
             //opening the url connection
             //connection = (HttpURLConnection) url.openConnection();
             connection = (HttpsURLConnection) url.openConnection();
@@ -126,6 +151,7 @@ public class SearchActivity extends AppCompatActivity {
         } catch (Exception e) {
 
             e.printStackTrace();
+
         }
 
 
@@ -161,24 +187,36 @@ public class SearchActivity extends AppCompatActivity {
                     researchpapersArrayList.add(researchpapers);
                     searchListViewAdapter adapter = new searchListViewAdapter(researchpapersArrayList, getApplicationContext());
                     searchListView.setAdapter(adapter);
+                    closeKeyboard();
                 }
                 numberOfPapers = Integer.toString(i);
 
                 numberTextView.setText(numberOfPapers);
+                spinner.setVisibility(View.GONE);
+                loading_text1.setVisibility(View.GONE);
+
 
             } catch (JSONException e) {
+                closeKeyboard();
                 e.printStackTrace();
+                spinner.setVisibility(View.GONE);
+                loading_text1.setVisibility(View.GONE);
             }
         } catch (IOException e) {
+            closeKeyboard();
             e.printStackTrace();
         }
 
     }
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        spinner=(ProgressBar)findViewById(R.id.progressBar_search);
+        loading_text1 = (TextView)findViewById(R.id.loading_text_search);
+
 
         //EditText to take in search query
         searchEditText = (EditText) findViewById(R.id.searchEditText);
@@ -194,9 +232,21 @@ public class SearchActivity extends AppCompatActivity {
         domain = getIntent().getExtras().get("domain").toString();
 
 
-
-
         researchpapersArrayList = new ArrayList<>();
+
+
+        searchEditText.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    // Perform action on key press
+                    search(search);
+                    return true;
+                }
+                return false;
+            }
+         });
 
 
 
@@ -225,11 +275,9 @@ public class SearchActivity extends AppCompatActivity {
 
         //I actually don't know what these lines do but these are needed for sending the post request
         //and receiving the response
-        if (android.os.Build.VERSION.SDK_INT > 9)
-        {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
     }
+
 }

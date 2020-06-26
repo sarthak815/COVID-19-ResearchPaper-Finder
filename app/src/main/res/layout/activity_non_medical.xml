@@ -27,13 +27,12 @@
             android:layout_height="match_parent"
             android:layout_weight="0.05"
             android:background="#ECECEC"/>
-
         <ImageButton
             android:id="@+id/imageButton2"
+            android:background="#0e1111"
+            android:layout_weight="1.95"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.95"
-            android:background="#0e1111"
             android:onClick="search"
             app:srcCompat="@android:drawable/ic_menu_search" />
         <View
@@ -86,27 +85,12 @@
     android:gravity="center"
     android:visibility="gone"/>
 
-    <TextView
-        android:id="@+id/loading_text2"
-        android:background="#696969"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.96"
-        android:text="Almost there..."
-        android:textStyle="bold"
-        android:textSize="45sp"
-        android:textColor="#ECECEC"
-        android:gravity="center"
-        android:visibility="gone"/>
-
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchListView"
+        android:id="@+id/listview"
+        android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:layout_weight="7.96"
-        android:scrollbars="vertical" />
-
+        android:layout_height="0dp"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"

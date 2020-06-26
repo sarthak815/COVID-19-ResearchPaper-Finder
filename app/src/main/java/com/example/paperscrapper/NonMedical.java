@@ -32,13 +32,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class NonMedical extends AppCompatActivity {
-    private static final String url = "https://whispering-beyond-66252.herokuapp.com/data/all";
+    private static final String url = "https://raw.githubusercontent.com/sarthak815/covid19data/master/covid2.txt";
     RecyclerView listView;
     private ProgressBar spinner;
     ArrayList<Researchpapers> researchpapersArrayList;
 
-    TextView length_paper, loading_text1, loading_text2;
+    TextView length_paper, loading_text1;
     String num1;
+
+    public void search(View view) {
+        Intent searchActivity = new Intent(NonMedical.this, SearchActivity.class);
+        searchActivity.putExtra("domain", "non-med");
+        startActivity(searchActivity);
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,10 +53,10 @@ public class NonMedical extends AppCompatActivity {
         researchpapersArrayList = new ArrayList<>();
         spinner=(ProgressBar)findViewById(R.id.progressBar1);
         loading_text1 = (TextView)findViewById(R.id.loading_text1);
-        loading_text2 = (TextView) findViewById(R.id.loading_text2);
+
         spinner.setVisibility(View.GONE);
         loading_text1.setVisibility(View.GONE);
-        loading_text2.setVisibility(View.GONE);
+
         loadresearchpapersList();
 
 
@@ -59,19 +65,6 @@ public class NonMedical extends AppCompatActivity {
         spinner.setVisibility(View.VISIBLE);
         loading_text1.setVisibility(View.VISIBLE);
 
-        final View v = loading_text1; // your view
-        loading_text1.postDelayed(new Runnable() {
-            public void run() {
-                    TranslateAnimation animate = new TranslateAnimation(0, v.getWidth(),0,0);
-                    animate.setDuration(500);
-                    animate.setFillAfter(true);
-                    v.startAnimation(animate);
-                    v.setVisibility(View.GONE);
-
-                    loading_text2.setVisibility(View.VISIBLE);
-                }
-
-        }, 7000);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 
             @Override
@@ -91,7 +84,6 @@ public class NonMedical extends AppCompatActivity {
                     }
                     spinner.setVisibility(View.GONE);
                     loading_text1.setVisibility(View.GONE);
-                    loading_text2.setVisibility(View.GONE);
                     length_paper= (TextView) findViewById(R.id.num_paper);
 
                     length_paper.setText(num1);
@@ -99,7 +91,6 @@ public class NonMedical extends AppCompatActivity {
                 } catch (JSONException e) {
                     spinner.setVisibility(View.GONE);
                     loading_text1.setVisibility(View.GONE);
-                    loading_text2.setVisibility(View.GONE);
                     e.printStackTrace();
                 }
             }
