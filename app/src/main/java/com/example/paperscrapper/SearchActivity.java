@@ -258,6 +258,8 @@ public class SearchActivity extends AppCompatActivity {
                 String authors1 = researchpapersArrayList.get(position).getAuthors().toString();
                 String journal1 = researchpapersArrayList.get(position).getJournal().toString();
                 String citations1 = researchpapersArrayList.get(position).getCitations().toString();
+                int f = (int) Float.parseFloat(citations1);
+                citations1 = String.valueOf(f);
                 String abstract2 = researchpapersArrayList.get(position).getAbstract1().toString();
                 Intent paperView = new Intent(SearchActivity.this, paperview.class);
                 paperView.putExtra("ListViewClickedValue", TempListViewClickedValue);

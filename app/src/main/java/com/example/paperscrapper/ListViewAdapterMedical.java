@@ -40,7 +40,8 @@ public class ListViewAdapterMedical extends RecyclerView.Adapter<ListViewAdapter
         Researchpapers researchpapers = paperlist.get(position);
         holder.name_med.setText(researchpapers.getTitle());
         String num = String.valueOf(researchpapers.getCitations());
-        String str[] = num.split(".");
+        int f = (int) Float.parseFloat(num);
+        num = String.valueOf(f);
         holder.citations2_med.setText(num);
         holder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +51,8 @@ public class ListViewAdapterMedical extends RecyclerView.Adapter<ListViewAdapter
                 String authors1  = paperlist.get(position).getAuthors().toString();
                 String journal1  = paperlist.get(position).getJournal().toString();
                 String citations1  = paperlist.get(position).getCitations().toString();
+                int f = (int) Float.parseFloat(citations1);
+                citations1 = String.valueOf(f);
                 String abstract2 = paperlist.get(position).getAbstract1().toString();
                 Intent intent = new Intent(context, paperview.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -34,7 +34,8 @@ class searchListViewAdapter extends ArrayAdapter<Researchpapers> {
         Researchpapers researchpapers = paperlist.get(position);
         name.setText(researchpapers.getTitle());
         String num = String.valueOf(researchpapers.getCitations());
-        String str[] = num.split(".");
+        int f = (int) Float.parseFloat(num);
+        num = String.valueOf(f);
         citations.setText(num);
 
         return listviewitem;
