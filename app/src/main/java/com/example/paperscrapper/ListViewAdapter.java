@@ -41,6 +41,9 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
         String num = String.valueOf(researchpapers.getCitations());
         int f = (int) Float.parseFloat(num);
         num = String.valueOf(f);
+        if (num.equals("0")) {
+            num = "N/A";
+        }
         holder.citations2.setText(num);
         holder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override

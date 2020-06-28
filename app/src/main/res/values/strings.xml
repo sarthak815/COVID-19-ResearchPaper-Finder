@@ -8,4 +8,5 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="search">Search</string>
     <string name="main_menu">Main Menu</string>
+    <string name="hint"><font size="50"/><font color = "#ECECEC">Search</font></string>
 </resources>

@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -62,8 +63,85 @@ public class SearchActivity extends AppCompatActivity {
 
 
 
+    @SuppressLint("WrongViewCast")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_search);
+        spinner=(ProgressBar)findViewById(R.id.progressBar_search);
+        loading_text1 = (TextView)findViewById(R.id.loading_text_search);
+
+
+
+        //EditText to take in search query
+        searchEditText = (EditText) findViewById(R.id.searchEditText);
+
+        //ListView for showing the search results
+        searchListView = (ListView) findViewById(R.id.searchListView);
+
+        //TextView for showing the number of papers
+        numberTextView = (TextView) findViewById(R.id.numberTextView);
+        numberTextView.setText("0"); //setting the initial value as 0
+
+        //getting the variable domain from the previoud activity
+        domain = getIntent().getExtras().get("domain").toString();
+
+
+        researchpapersArrayList = new ArrayList<>();
+
+
+        searchEditText.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    // Perform action on key press
+                    search(search);
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
+
+        searchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String TempListViewClickedValue = researchpapersArrayList.get(position).getTitle().toString();
+                String link1 = researchpapersArrayList.get(position).getLink().toString();
+                String authors1 = researchpapersArrayList.get(position).getAuthors().toString();
+                String journal1 = researchpapersArrayList.get(position).getJournal().toString();
+                String citations1 = researchpapersArrayList.get(position).getCitations().toString();
+                int f = (int) Float.parseFloat(citations1);
+                citations1 = String.valueOf(f);
+                String abstract2 = researchpapersArrayList.get(position).getAbstract1().toString();
+                Intent paperView = new Intent(SearchActivity.this, paperview.class);
+                paperView.putExtra("ListViewClickedValue", TempListViewClickedValue);
+                paperView.putExtra("authors1", authors1 );
+                paperView.putExtra("journal1", journal1);
+                paperView.putExtra("citations1", citations1);
+                paperView.putExtra("link1", link1);
+                paperView.putExtra("abstract2", abstract2);
+                startActivity(paperView);
+            }
+        });
+
+
+
+
+        //I actually don't know what these lines do but these are needed for sending the post request
+        //and receiving the response
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+    }
+
     //this function closes the keyboard when it is called
     private void closeKeyboard() {
+
+        spinner.setVisibility(View.GONE);
+        loading_text1.setVisibility(View.GONE);
 
         View view = getCurrentFocus(); //gets the view currently in focus
 
@@ -86,8 +164,6 @@ public class SearchActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void search(View view) {
-
-
         spinner.setVisibility(View.VISIBLE);
         loading_text1.setVisibility(View.VISIBLE);
         med = "med";
@@ -192,8 +268,7 @@ public class SearchActivity extends AppCompatActivity {
                 numberOfPapers = Integer.toString(i);
 
                 numberTextView.setText(numberOfPapers);
-                spinner.setVisibility(View.GONE);
-                loading_text1.setVisibility(View.GONE);
+
 
 
             } catch (JSONException e) {
@@ -209,77 +284,6 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    @SuppressLint("WrongViewCast")
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
-        spinner=(ProgressBar)findViewById(R.id.progressBar_search);
-        loading_text1 = (TextView)findViewById(R.id.loading_text_search);
 
-
-        //EditText to take in search query
-        searchEditText = (EditText) findViewById(R.id.searchEditText);
-
-        //ListView for showing the search results
-        searchListView = (ListView) findViewById(R.id.searchListView);
-
-        //TextView for showing the number of papers
-        numberTextView = (TextView) findViewById(R.id.numberTextView);
-        numberTextView.setText("0"); //setting the initial value as 0
-
-        //getting the variable domain from the previoud activity
-        domain = getIntent().getExtras().get("domain").toString();
-
-
-        researchpapersArrayList = new ArrayList<>();
-
-
-        searchEditText.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                // If the event is a key-down event on the "enter" button
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    // Perform action on key press
-                    search(search);
-                    return true;
-                }
-                return false;
-            }
-         });
-
-
-
-        searchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String TempListViewClickedValue = researchpapersArrayList.get(position).getTitle().toString();
-                String link1 = researchpapersArrayList.get(position).getLink().toString();
-                String authors1 = researchpapersArrayList.get(position).getAuthors().toString();
-                String journal1 = researchpapersArrayList.get(position).getJournal().toString();
-                String citations1 = researchpapersArrayList.get(position).getCitations().toString();
-                int f = (int) Float.parseFloat(citations1);
-                citations1 = String.valueOf(f);
-                String abstract2 = researchpapersArrayList.get(position).getAbstract1().toString();
-                Intent paperView = new Intent(SearchActivity.this, paperview.class);
-                paperView.putExtra("ListViewClickedValue", TempListViewClickedValue);
-                paperView.putExtra("authors1", authors1 );
-                paperView.putExtra("journal1", journal1);
-                paperView.putExtra("citations1", citations1);
-                paperView.putExtra("link1", link1);
-                paperView.putExtra("abstract2", abstract2);
-                startActivity(paperView);
-            }
-        });
-
-
-
-
-        //I actually don't know what these lines do but these are needed for sending the post request
-        //and receiving the response
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-    }
 
 }

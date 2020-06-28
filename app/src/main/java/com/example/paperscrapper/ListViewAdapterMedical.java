@@ -42,6 +42,9 @@ public class ListViewAdapterMedical extends RecyclerView.Adapter<ListViewAdapter
         String num = String.valueOf(researchpapers.getCitations());
         int f = (int) Float.parseFloat(num);
         num = String.valueOf(f);
+        if (num.equals("0")) {
+            num = "N/A";
+        }
         holder.citations2_med.setText(num);
         holder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override

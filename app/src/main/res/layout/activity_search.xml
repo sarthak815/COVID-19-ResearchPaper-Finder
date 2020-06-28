@@ -24,7 +24,7 @@
            android:layout_width="0dp"
            android:layout_height="match_parent"
            android:layout_weight="8"
-           android:hint="search"
+           android:hint="@string/hint"
            android:id="@+id/searchEditText"
            android:singleLine="true"
            android:background="@null"
@@ -58,12 +58,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.96"
-        android:text=""
+        android:text="Loading.."
         android:textStyle="bold"
         android:textSize="30sp"
         android:textColor="#ECECEC"
         android:gravity="center"
         android:visibility="gone"/>
+
 
 
     <ListView
@@ -73,6 +74,8 @@
         android:layout_weight="7.96"
         android:divider="@drawable/listview_border"
         android:dividerHeight="2dp"/>
+
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
