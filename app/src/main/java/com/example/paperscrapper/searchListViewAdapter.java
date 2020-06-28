@@ -17,6 +17,7 @@ class searchListViewAdapter extends ArrayAdapter<Researchpapers> {
     Context context;
 
 
+
     public searchListViewAdapter(List<Researchpapers> paperlist, Context context) {
         super(context, R.layout.nonmed_list, paperlist);
         this.paperlist = paperlist;

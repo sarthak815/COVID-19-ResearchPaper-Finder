@@ -10,12 +10,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.TranslateAnimation;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -58,13 +60,10 @@ public class SearchActivity extends AppCompatActivity {
     ArrayList<Researchpapers> researchpapersArrayList;
     String nonMed;
     String med;
-    private ProgressBar spinner;
-    Button search;
+    ProgressBar spinner;
 
 
 
-    @SuppressLint("WrongViewCast")
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
@@ -90,13 +89,15 @@ public class SearchActivity extends AppCompatActivity {
         researchpapersArrayList = new ArrayList<>();
 
 
-        searchEditText.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                // If the event is a key-down event on the "enter" button
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    // Perform action on key press
-                    search(search);
+        searchEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                //spinner.setVisibility(View.VISIBLE);
+                //loading_text1.setVisibility(View.VISIBLE);
+
+                if(actionId == EditorInfo.IME_ACTION_DONE){
+                    loadpapers();
+                    closeKeyboard();
                     return true;
                 }
                 return false;
@@ -115,6 +116,9 @@ public class SearchActivity extends AppCompatActivity {
                 String citations1 = researchpapersArrayList.get(position).getCitations().toString();
                 int f = (int) Float.parseFloat(citations1);
                 citations1 = String.valueOf(f);
+                if (citations1.equals("0")) {
+                    citations1 = "N/A";
+                }
                 String abstract2 = researchpapersArrayList.get(position).getAbstract1().toString();
                 Intent paperView = new Intent(SearchActivity.this, paperview.class);
                 paperView.putExtra("ListViewClickedValue", TempListViewClickedValue);
@@ -140,9 +144,6 @@ public class SearchActivity extends AppCompatActivity {
     //this function closes the keyboard when it is called
     private void closeKeyboard() {
 
-        spinner.setVisibility(View.GONE);
-        loading_text1.setVisibility(View.GONE);
-
         View view = getCurrentFocus(); //gets the view currently in focus
 
         //check if something is in focus or not
@@ -162,10 +163,21 @@ public class SearchActivity extends AppCompatActivity {
     //domain = med / non-med
     String domain;
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     public void search(View view) {
-        spinner.setVisibility(View.VISIBLE);
-        loading_text1.setVisibility(View.VISIBLE);
+        //spinner.setVisibility(View.VISIBLE);
+        //loading_text1.setVisibility(View.VISIBLE);
+        loadpapers();
+        //spinner.setVisibility(View.GONE);
+        //loading_text1.setVisibility(View.GONE);
+
+
+
+    }
+
+
+    public void loadpapers(){
+
         med = "med";
         nonMed = "non-med";
 
@@ -210,8 +222,7 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         try {
-            spinner.setVisibility(View.VISIBLE);
-            loading_text1.setVisibility(View.VISIBLE);
+
             //opening the url connection
             //connection = (HttpURLConnection) url.openConnection();
             connection = (HttpsURLConnection) url.openConnection();
@@ -253,6 +264,7 @@ public class SearchActivity extends AppCompatActivity {
             researchpapersArrayList.clear();
 
             try {
+
                 JSONObject jsonObject = new JSONObject(response.toString());
                 JSONArray jsonArray = jsonObject.getJSONArray("result");
                 int i;
@@ -268,19 +280,25 @@ public class SearchActivity extends AppCompatActivity {
                 numberOfPapers = Integer.toString(i);
 
                 numberTextView.setText(numberOfPapers);
+                //spinner.setVisibility(View.GONE);
+                //loading_text1.setVisibility(View.GONE);
 
 
 
             } catch (JSONException e) {
+
                 closeKeyboard();
                 e.printStackTrace();
-                spinner.setVisibility(View.GONE);
-                loading_text1.setVisibility(View.GONE);
+                //spinner.setVisibility(View.GONE);
+                //loading_text1.setVisibility(View.GONE);
+
             }
         } catch (IOException e) {
             closeKeyboard();
             e.printStackTrace();
+
         }
+
 
     }
 

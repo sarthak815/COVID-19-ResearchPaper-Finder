@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="#373839"
     android:orientation="vertical"
-    android:paddingLeft="3dp"
-    android:paddingRight="3dp"
+
     android:weightSum="10"
     tools:context=".SearchActivity">
 
@@ -28,7 +27,7 @@
            android:id="@+id/searchEditText"
            android:singleLine="true"
            android:background="@null"
-
+           android:imeOptions="actionDone"
            android:textColor="#ECECEC"/>
         <ImageButton
             android:id="@+id/searchButton"
@@ -69,6 +68,8 @@
 
 
     <ListView
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
         android:id="@+id/searchListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"

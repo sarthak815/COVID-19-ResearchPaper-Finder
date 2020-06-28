@@ -179,23 +179,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
-        android:weightSum="1">
+        android:layout_weight="2">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <Button
             android:id="@+id/open"
             android:stateListAnimator="@drawable/button_animation"
             android:layout_width="264dp"
             android:layout_height="78dp"
-            android:layout_gravity="center"
+            android:layout_centerInParent="true"
             android:gravity="center"
-            android:layout_marginLeft="70dp"
             android:background="@drawable/curvedbutton"
             android:onClick="browser1"
             android:text="Open"
-            android:textSize="25sp"
-            tools:layout_editor_absoluteX="74dp"
-            tools:layout_editor_absoluteY="618dp" />
+            android:textSize="25sp" />
+        </RelativeLayout>
 
     </LinearLayout>
 
