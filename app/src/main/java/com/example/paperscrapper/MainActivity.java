@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -30,9 +31,11 @@ public class MainActivity extends AppCompatActivity {
     public void getNewActivity(View view) {
         try {
             if(Integer.parseInt( view.getTag().toString()) == 1) {
+                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                 Intent nonMedical = new Intent(this, NonMedical.class);
                 startActivity(nonMedical);
             } else if(Integer.parseInt( view.getTag().toString()) == 0) {
+                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                 Intent medical = new Intent(this, Medical.class);
                 startActivity(medical);
             }
