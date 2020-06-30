@@ -35,7 +35,6 @@
             android:layout_weight="1.95"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:onClick="search"
             android:stateListAnimator="@drawable/button_animation"
             app:srcCompat="@android:drawable/ic_menu_search" />
     </LinearLayout>
@@ -44,20 +43,13 @@
         android:layout_height="0dp"
         android:layout_weight="0.05"
         android:background="#ECECEC"/>
-    <ProgressBar
-        android:indeterminateDrawable="@drawable/circular_progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/progressBar_search"
-        android:layout_gravity="center"
-        android:layout_weight="7"
-        android:visibility="gone" />
+
     <TextView
         android:id="@+id/loading_text_search"
         android:background="#696969"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.96"
+        android:layout_weight="1.5"
         android:text="Loading.."
         android:textStyle="bold"
         android:textSize="30sp"

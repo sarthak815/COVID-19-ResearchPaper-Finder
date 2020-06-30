@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +23,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -61,16 +63,17 @@ public class SearchActivity extends AppCompatActivity {
     String nonMed;
     String med;
     ProgressBar spinner;
+    ImageButton search;
+    String domain;
 
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        spinner=(ProgressBar)findViewById(R.id.progressBar_search);
         loading_text1 = (TextView)findViewById(R.id.loading_text_search);
 
-
+        search = (ImageButton)findViewById(R.id.searchButton);
 
         //EditText to take in search query
         searchEditText = (EditText) findViewById(R.id.searchEditText);
@@ -96,11 +99,22 @@ public class SearchActivity extends AppCompatActivity {
                 //loading_text1.setVisibility(View.VISIBLE);
 
                 if(actionId == EditorInfo.IME_ACTION_DONE){
-                    loadpapers();
+                    new loadpaperstolist().execute();
                     closeKeyboard();
                     return true;
                 }
                 return false;
+            }
+        });
+
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                closeKeyboard();
+                new loadpaperstolist().execute();
+
             }
         });
 
@@ -157,25 +171,36 @@ public class SearchActivity extends AppCompatActivity {
 
 
 
+    private class loadpaperstolist extends AsyncTask<Void, Void, Void> {
 
+        // A callback method executed on UI thread on starting the task
+        @Override
+        protected void onPreExecute() {
 
-    //The variable "domain" contains a string that contains "med" or "non-med" to search in the respective Data Bases
-    //domain = med / non-med
-    String domain;
+            loading_text1.setVisibility(View.VISIBLE);
 
+        }
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            SearchActivity.this.runOnUiThread(new Runnable(){
+                @Override
+                public void run(){
+                    loadpapers();
+                }
+            });
+            return null;
 
-    public void search(View view) {
-        //spinner.setVisibility(View.VISIBLE);
-        //loading_text1.setVisibility(View.VISIBLE);
-        loadpapers();
-        //spinner.setVisibility(View.GONE);
-        //loading_text1.setVisibility(View.GONE);
+        }
 
+        @Override
+        protected void onPostExecute(Void result) {
 
+            loading_text1.setVisibility(View.GONE);
 
+        }
     }
 
-
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void loadpapers(){
 
         med = "med";
@@ -183,7 +208,6 @@ public class SearchActivity extends AppCompatActivity {
 
         //calling the function closeKeyboard to close keyboard
 
-        closeKeyboard();
         //get the search query and store it in the variable searchQuery
         String searchQuery = searchEditText.getText().toString();
 
@@ -201,16 +225,158 @@ public class SearchActivity extends AppCompatActivity {
             //set the url for non-med database
             try {
                 url = new URL("https://testingdeploy1307.herokuapp.com/data/NonMedical/postreqALL");
+                try {
+
+                    //opening the url connection
+                    //connection = (HttpURLConnection) url.openConnection();
+                    connection = (HttpsURLConnection) url.openConnection();
+
+                    //setting up a post request method
+                    connection.setRequestMethod("POST");
+
+                    //setting up a request type
+                    connection.setRequestProperty("Content-Type", "application/json; utf-8");
+                    connection.setRequestProperty("Accept", "application/json");
+                    connection.setDoOutput(true);
+                    try {
+                        assert connection != null;
+                        OutputStream os = connection.getOutputStream();
+                        byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
+                        os.write(input, 0, input.length);
+                        try(BufferedReader br = new BufferedReader(
+                                new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
+                            StringBuilder response = new StringBuilder();
+                            String responseLine = null;
+                            while ((responseLine = br.readLine()) != null) {
+                                response.append(responseLine.trim());
+                            }
+                            //code to print the response in a list view
+                            //System.out.println(response.toString());
+                            researchpapersArrayList.clear();
+
+                            try {
+
+                                JSONObject jsonObject = new JSONObject(response.toString());
+                                JSONArray jsonArray = jsonObject.getJSONArray("result");
+                                int i;
+                                for (i = 0; i < jsonArray.length(); i++) {
+
+                                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                                    Researchpapers researchpapers = new Researchpapers(jsonObject1.getString("Title"), jsonObject1.getString("link"),jsonObject1.getString("authors"),jsonObject1.getString("journal domain"),jsonObject1.getString("citations"),jsonObject1.getString("abstract"));
+                                    researchpapersArrayList.add(researchpapers);
+                                    searchListViewAdapter adapter = new searchListViewAdapter(researchpapersArrayList, getApplicationContext());
+                                    searchListView.setAdapter(adapter);
+                                    closeKeyboard();
+                                }
+                                numberOfPapers = Integer.toString(i);
+
+                                numberTextView.setText(numberOfPapers);
+
+
+
+
+                            } catch (JSONException e) {
+
+
+                                e.printStackTrace();
+
+
+                            }
+                        }catch(Exception e) {
+                            e.printStackTrace();
+                    }
+                    }catch (Exception e) {
+
+                        e.printStackTrace();
+
+                    }
+
+                } catch (IOException e) {
+
+                    e.printStackTrace();
+                }
+
             } catch(Exception e) {
-                closeKeyboard();
                 e.printStackTrace();
             }
 
         } else if (domain.equals(med)) {
             try {
-                url = new URL("https://testingdeploy1307.herokuapp.com/data/Medical/postreqALL");
+                url = new URL("https://testingdeploy1307.herokuapp.com/data/NonMedical/postreqALL");
+                try {
+
+                    //opening the url connection
+                    //connection = (HttpURLConnection) url.openConnection();
+                    connection = (HttpsURLConnection) url.openConnection();
+
+                    //setting up a post request method
+                    connection.setRequestMethod("POST");
+
+                    //setting up a request type
+                    connection.setRequestProperty("Content-Type", "application/json; utf-8");
+                    connection.setRequestProperty("Accept", "application/json");
+                    connection.setDoOutput(true);
+                    try {
+                        assert connection != null;
+                        OutputStream os = connection.getOutputStream();
+                        byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
+                        os.write(input, 0, input.length);
+                        try(BufferedReader br = new BufferedReader(
+                                new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
+                            StringBuilder response = new StringBuilder();
+                            String responseLine = null;
+                            while ((responseLine = br.readLine()) != null) {
+                                response.append(responseLine.trim());
+                            }
+                            //code to print the response in a list view
+                            //System.out.println(response.toString());
+                            researchpapersArrayList.clear();
+
+                            try {
+
+                                JSONObject jsonObject = new JSONObject(response.toString());
+                                JSONArray jsonArray = jsonObject.getJSONArray("result");
+                                int i;
+                                for (i = 0; i < jsonArray.length(); i++) {
+
+                                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                                    Researchpapers researchpapers = new Researchpapers(jsonObject1.getString("Title"), jsonObject1.getString("link"),jsonObject1.getString("authors"),jsonObject1.getString("journal domain"),jsonObject1.getString("citations"),jsonObject1.getString("abstract"));
+                                    researchpapersArrayList.add(researchpapers);
+                                    searchListViewAdapter adapter = new searchListViewAdapter(researchpapersArrayList, getApplicationContext());
+                                    searchListView.setAdapter(adapter);
+                                    closeKeyboard();
+                                }
+                                numberOfPapers = Integer.toString(i);
+
+                                numberTextView.setText(numberOfPapers);
+                                //spinner.setVisibility(View.GONE);
+                                //loading_text1.setVisibility(View.GONE);
+
+
+
+                            } catch (JSONException e) {
+
+
+                                e.printStackTrace();
+                                //spinner.setVisibility(View.GONE);
+                                //loading_text1.setVisibility(View.GONE);
+
+                            }
+                        }catch(Exception e) {
+                            e.printStackTrace();
+                        }
+                    }catch (Exception e) {
+
+                        e.printStackTrace();
+
+                    }
+
+                } catch (IOException e) {
+
+                    e.printStackTrace();
+                }
+
             } catch(Exception e) {
-                closeKeyboard();
                 e.printStackTrace();
             }
         } else {
@@ -221,83 +387,6 @@ public class SearchActivity extends AppCompatActivity {
             return;
         }
 
-        try {
-
-            //opening the url connection
-            //connection = (HttpURLConnection) url.openConnection();
-            connection = (HttpsURLConnection) url.openConnection();
-
-            //setting up a post request method
-            connection.setRequestMethod("POST");
-
-            //setting up a request type
-            connection.setRequestProperty("Content-Type", "application/json; utf-8");
-            connection.setRequestProperty("Accept", "application/json");
-            connection.setDoOutput(true);
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-        }
-
-
-        try {
-            assert connection != null;
-            OutputStream os = connection.getOutputStream();
-            byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
-            os.write(input, 0, input.length);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-
-        try(BufferedReader br = new BufferedReader(
-                new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
-            StringBuilder response = new StringBuilder();
-            String responseLine = null;
-            while ((responseLine = br.readLine()) != null) {
-                response.append(responseLine.trim());
-            }
-
-            //code to print the response in a list view
-            //System.out.println(response.toString());
-            researchpapersArrayList.clear();
-
-            try {
-
-                JSONObject jsonObject = new JSONObject(response.toString());
-                JSONArray jsonArray = jsonObject.getJSONArray("result");
-                int i;
-                for (i = 0; i < jsonArray.length(); i++) {
-
-                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                    Researchpapers researchpapers = new Researchpapers(jsonObject1.getString("Title"), jsonObject1.getString("link"),jsonObject1.getString("authors"),jsonObject1.getString("journal domain"),jsonObject1.getString("citations"),jsonObject1.getString("abstract"));
-                    researchpapersArrayList.add(researchpapers);
-                    searchListViewAdapter adapter = new searchListViewAdapter(researchpapersArrayList, getApplicationContext());
-                    searchListView.setAdapter(adapter);
-                    closeKeyboard();
-                }
-                numberOfPapers = Integer.toString(i);
-
-                numberTextView.setText(numberOfPapers);
-                //spinner.setVisibility(View.GONE);
-                //loading_text1.setVisibility(View.GONE);
-
-
-
-            } catch (JSONException e) {
-
-                closeKeyboard();
-                e.printStackTrace();
-                //spinner.setVisibility(View.GONE);
-                //loading_text1.setVisibility(View.GONE);
-
-            }
-        } catch (IOException e) {
-            closeKeyboard();
-            e.printStackTrace();
-
-        }
 
 
     }

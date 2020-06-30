@@ -32,7 +32,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class NonMedical extends AppCompatActivity {
-    private static final String url = "https://raw.githubusercontent.com/sarthak815/covid19data/master/covid2.txt";
+    private static final String url = "https://raw.githubusercontent.com/R13D13/sturdy-umbrella/master/NonMedicalData.json";
     RecyclerView listView;
     private ProgressBar spinner;
     ArrayList<Researchpapers> researchpapersArrayList;
@@ -54,16 +54,14 @@ public class NonMedical extends AppCompatActivity {
         spinner=(ProgressBar)findViewById(R.id.progressBar1);
         loading_text1 = (TextView)findViewById(R.id.loading_text1);
 
-        spinner.setVisibility(View.GONE);
-        loading_text1.setVisibility(View.GONE);
+        spinner.setVisibility(View.VISIBLE);
+        loading_text1.setVisibility(View.VISIBLE);
 
         loadresearchpapersList();
 
 
     }
     private void loadresearchpapersList() {
-        spinner.setVisibility(View.VISIBLE);
-        loading_text1.setVisibility(View.VISIBLE);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 

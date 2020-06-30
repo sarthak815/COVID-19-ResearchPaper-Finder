@@ -29,7 +29,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Medical extends AppCompatActivity {
-    private static final String url = "https://raw.githubusercontent.com/sarthak815/covid19data/master/covid2.txt";
+    private static final String url = "https://raw.githubusercontent.com/R13D13/sturdy-umbrella/master/MedicalData.json";
     private ProgressBar spinner;
     RecyclerView listView;
     ArrayList<Researchpapers> researchpapersArrayList;
@@ -53,9 +53,9 @@ public class Medical extends AppCompatActivity {
         spinner=(ProgressBar)findViewById(R.id.progressBar);
         loading_text = (TextView)findViewById(R.id.loading_text);
 
-        spinner.setVisibility(View.GONE);
+        spinner.setVisibility(View.VISIBLE);
 
-        loading_text.setVisibility(View.GONE);
+        loading_text.setVisibility(View.VISIBLE);
         loadresearchpapersList();
 
 
