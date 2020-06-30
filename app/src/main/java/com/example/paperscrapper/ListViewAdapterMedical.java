@@ -56,6 +56,10 @@ public class ListViewAdapterMedical extends RecyclerView.Adapter<ListViewAdapter
                 String citations1  = paperlist.get(position).getCitations().toString();
                 int f = (int) Float.parseFloat(citations1);
                 citations1 = String.valueOf(f);
+
+                if (citations1.equals("0")) {
+                    citations1 = "N/A";
+                }
                 String abstract2 = paperlist.get(position).getAbstract1().toString();
                 Intent intent = new Intent(context, paperview.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
