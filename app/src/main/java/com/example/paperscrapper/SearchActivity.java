@@ -208,6 +208,7 @@ public class SearchActivity extends AppCompatActivity {
 
         //calling the function closeKeyboard to close keyboard
 
+        closeKeyboard();
         //get the search query and store it in the variable searchQuery
         String searchQuery = searchEditText.getText().toString();
 
@@ -225,158 +226,16 @@ public class SearchActivity extends AppCompatActivity {
             //set the url for non-med database
             try {
                 url = new URL("https://testingdeploy1307.herokuapp.com/data/NonMedical/postreqALL");
-                try {
-
-                    //opening the url connection
-                    //connection = (HttpURLConnection) url.openConnection();
-                    connection = (HttpsURLConnection) url.openConnection();
-
-                    //setting up a post request method
-                    connection.setRequestMethod("POST");
-
-                    //setting up a request type
-                    connection.setRequestProperty("Content-Type", "application/json; utf-8");
-                    connection.setRequestProperty("Accept", "application/json");
-                    connection.setDoOutput(true);
-                    try {
-                        assert connection != null;
-                        OutputStream os = connection.getOutputStream();
-                        byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
-                        os.write(input, 0, input.length);
-                        try(BufferedReader br = new BufferedReader(
-                                new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
-                            StringBuilder response = new StringBuilder();
-                            String responseLine = null;
-                            while ((responseLine = br.readLine()) != null) {
-                                response.append(responseLine.trim());
-                            }
-                            //code to print the response in a list view
-                            //System.out.println(response.toString());
-                            researchpapersArrayList.clear();
-
-                            try {
-
-                                JSONObject jsonObject = new JSONObject(response.toString());
-                                JSONArray jsonArray = jsonObject.getJSONArray("result");
-                                int i;
-                                for (i = 0; i < jsonArray.length(); i++) {
-
-                                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                                    Researchpapers researchpapers = new Researchpapers(jsonObject1.getString("Title"), jsonObject1.getString("link"),jsonObject1.getString("authors"),jsonObject1.getString("journal domain"),jsonObject1.getString("citations"),jsonObject1.getString("abstract"));
-                                    researchpapersArrayList.add(researchpapers);
-                                    searchListViewAdapter adapter = new searchListViewAdapter(researchpapersArrayList, getApplicationContext());
-                                    searchListView.setAdapter(adapter);
-                                    closeKeyboard();
-                                }
-                                numberOfPapers = Integer.toString(i);
-
-                                numberTextView.setText(numberOfPapers);
-
-
-
-
-                            } catch (JSONException e) {
-
-
-                                e.printStackTrace();
-
-
-                            }
-                        }catch(Exception e) {
-                            e.printStackTrace();
-                    }
-                    }catch (Exception e) {
-
-                        e.printStackTrace();
-
-                    }
-
-                } catch (IOException e) {
-
-                    e.printStackTrace();
-                }
-
             } catch(Exception e) {
+                closeKeyboard();
                 e.printStackTrace();
             }
 
         } else if (domain.equals(med)) {
             try {
-                url = new URL("https://testingdeploy1307.herokuapp.com/data/NonMedical/postreqALL");
-                try {
-
-                    //opening the url connection
-                    //connection = (HttpURLConnection) url.openConnection();
-                    connection = (HttpsURLConnection) url.openConnection();
-
-                    //setting up a post request method
-                    connection.setRequestMethod("POST");
-
-                    //setting up a request type
-                    connection.setRequestProperty("Content-Type", "application/json; utf-8");
-                    connection.setRequestProperty("Accept", "application/json");
-                    connection.setDoOutput(true);
-                    try {
-                        assert connection != null;
-                        OutputStream os = connection.getOutputStream();
-                        byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
-                        os.write(input, 0, input.length);
-                        try(BufferedReader br = new BufferedReader(
-                                new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
-                            StringBuilder response = new StringBuilder();
-                            String responseLine = null;
-                            while ((responseLine = br.readLine()) != null) {
-                                response.append(responseLine.trim());
-                            }
-                            //code to print the response in a list view
-                            //System.out.println(response.toString());
-                            researchpapersArrayList.clear();
-
-                            try {
-
-                                JSONObject jsonObject = new JSONObject(response.toString());
-                                JSONArray jsonArray = jsonObject.getJSONArray("result");
-                                int i;
-                                for (i = 0; i < jsonArray.length(); i++) {
-
-                                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                                    Researchpapers researchpapers = new Researchpapers(jsonObject1.getString("Title"), jsonObject1.getString("link"),jsonObject1.getString("authors"),jsonObject1.getString("journal domain"),jsonObject1.getString("citations"),jsonObject1.getString("abstract"));
-                                    researchpapersArrayList.add(researchpapers);
-                                    searchListViewAdapter adapter = new searchListViewAdapter(researchpapersArrayList, getApplicationContext());
-                                    searchListView.setAdapter(adapter);
-                                    closeKeyboard();
-                                }
-                                numberOfPapers = Integer.toString(i);
-
-                                numberTextView.setText(numberOfPapers);
-                                //spinner.setVisibility(View.GONE);
-                                //loading_text1.setVisibility(View.GONE);
-
-
-
-                            } catch (JSONException e) {
-
-
-                                e.printStackTrace();
-                                //spinner.setVisibility(View.GONE);
-                                //loading_text1.setVisibility(View.GONE);
-
-                            }
-                        }catch(Exception e) {
-                            e.printStackTrace();
-                        }
-                    }catch (Exception e) {
-
-                        e.printStackTrace();
-
-                    }
-
-                } catch (IOException e) {
-
-                    e.printStackTrace();
-                }
-
+                url = new URL("https://testingdeploy1307.herokuapp.com/data/Medical/postreqALL");
             } catch(Exception e) {
+                closeKeyboard();
                 e.printStackTrace();
             }
         } else {
@@ -387,7 +246,75 @@ public class SearchActivity extends AppCompatActivity {
             return;
         }
 
+        try {
 
+            //opening the url connection
+            //connection = (HttpURLConnection) url.openConnection();
+            connection = (HttpsURLConnection) url.openConnection();
+
+            //setting up a post request method
+            connection.setRequestMethod("POST");
+
+            //setting up a request type
+            connection.setRequestProperty("Content-Type", "application/json; utf-8");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setDoOutput(true);
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+
+
+        try {
+            assert connection != null;
+            OutputStream os = connection.getOutputStream();
+            byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
+            os.write(input, 0, input.length);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        try(BufferedReader br = new BufferedReader(
+                new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
+            StringBuilder response = new StringBuilder();
+            String responseLine = null;
+            while ((responseLine = br.readLine()) != null) {
+                response.append(responseLine.trim());
+            }
+
+            //code to print the response in a list view
+            //System.out.println(response.toString());
+            researchpapersArrayList.clear();
+
+            try {
+                JSONObject jsonObject = new JSONObject(response.toString());
+                JSONArray jsonArray = jsonObject.getJSONArray("result");
+                int i;
+                for (i = 0; i < jsonArray.length(); i++) {
+
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                    Researchpapers researchpapers = new Researchpapers(jsonObject1.getString("Title"), jsonObject1.getString("link"),jsonObject1.getString("authors"),jsonObject1.getString("journal domain"),jsonObject1.getString("citations"),jsonObject1.getString("abstract"));
+                    researchpapersArrayList.add(researchpapers);
+                    searchListViewAdapter adapter = new searchListViewAdapter(researchpapersArrayList, getApplicationContext());
+                    searchListView.setAdapter(adapter);
+
+                }
+                numberOfPapers = Integer.toString(i);
+
+                numberTextView.setText(numberOfPapers);
+
+
+
+            } catch (JSONException e) {
+
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
 
     }
 
