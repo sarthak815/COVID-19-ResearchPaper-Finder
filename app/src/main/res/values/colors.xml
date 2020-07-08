@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="theme_color">#0e1111</color>
+    <color name="dialog_ok_bgcolor">#1a8be8</color>
+    <color name="dialog_cancel_bgcolor">#FF0000</color>
+    <color name = "white">#FFFFFF</color>
 </resources>

@@ -1,12 +1,18 @@
 package com.example.paperscrapper;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,8 +31,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    Button contribute, yes, no,cancel;
 
-    ListView listView;
 
     public void getNewActivity(View view) {
         try {
@@ -44,14 +50,58 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    public void openDialog() {
+
+        final Dialog dialog = new Dialog(this, R.style.FilterDialogTheme); // Context, this, etc.
+        dialog.setContentView(R.layout.dialog_box);
+        dialog.setTitle(R.string.dialog_title);
+        dialog.show();
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         //geeksforgeeks.org/android-creating-multiple-screen-app/
     }
 
 
+    public void contribute(View view) {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setTitle("Contribute/Rectify the database");
+        builder1.setMessage("You can suggest rectifications for the app. \n" +
+                "For example - Missing app data, incorrect information , etc.\n" +
+                "You can also contribute to the database by giving information on paper that you want to be added and help the users to search through");
+        builder1.setCancelable(true);
 
+        builder1.setPositiveButton(
+                "Proceed",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
+
+    public void yes(View view) {
+        String url = "https://testingdeploy1307.herokuapp.com/data/form";
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
+    }
 }
