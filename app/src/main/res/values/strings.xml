@@ -9,8 +9,8 @@
     <string name="search">Search</string>
     <string name="main_menu">Main Menu</string>
     <string name="dialog_title">Contribute/Rectify</string>
-    <string name="dialog_text">You can suggest rectifications for the app.
+    <string name="dialog_text">You can suggest rectifications for any errors in the dataset.
 For example - Missing app data, incorrect information , etc.
-You can also contribute to the database by giving information on paper that you want to be added and help the users to search through</string>
+You can also contribute to the database by providing details of papers currently not present in the app.</string>
     <string name="hint"><font size="50"/><font color = "#ECECEC">Search</font></string>
 </resources>

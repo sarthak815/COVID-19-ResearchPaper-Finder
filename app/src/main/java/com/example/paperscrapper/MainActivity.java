@@ -82,7 +82,9 @@ public class MainActivity extends AppCompatActivity {
                 "Proceed",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
+                        String url = "https://testingdeploy1307.herokuapp.com/data/form";
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        startActivity(browserIntent);
                     }
                 });
 
@@ -99,9 +101,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void yes(View view) {
-        String url = "https://testingdeploy1307.herokuapp.com/data/form";
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(browserIntent);
-    }
+
 }
